@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0D3B66" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0F1419" media="(prefers-color-scheme: dark)" />
+  <title>Roteiro do dia — Maize em Austin</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <a href="../index.html" class="back-btn" aria-label="Voltar">←</a>
+      <div>
+        <h1 class="page-title">🧭 Roteiro do dia</h1>
+        <p class="page-subtitle">Salvo automaticamente no celular</p>
+      </div>
+    </header>
+
+    <form id="routine-form" autocomplete="off">
+      <div class="routine-block">
+        <label for="manha">☀️ Manhã</label>
+        <textarea id="manha" name="manha" placeholder="Ex: café no Veracruz, caminhada no Lady Bird Lake..."></textarea>
+      </div>
+
+      <div class="routine-block">
+        <label for="tarde">🌤️ Tarde</label>
+        <textarea id="tarde" name="tarde" placeholder="Ex: visitar o Capitol, compras no The Domain..."></textarea>
+      </div>
+
+      <div class="routine-block">
+        <label for="noite">🌙 Noite</label>
+        <textarea id="noite" name="noite" placeholder="Ex: jantar no Franklin BBQ, música ao vivo na Rainey St..."></textarea>
+      </div>
+
+      <div class="routine-actions">
+        <button type="button" class="btn btn-ghost" id="clear-btn">Limpar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </div>
+    </form>
+
+    <footer class="footer">Funciona offline — fica salvo só nesse celular 📱</footer>
+  </main>
+
+  <script src="../script.js"></script>
+  <script>
+    const KEY = "maize-austin-roteiro";
+    const form = document.getElementById("routine-form");
+    const fields = ["manha", "tarde", "noite"];
+
+    // Carrega salvo
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+      fields.forEach((f) => {
+        if (saved[f]) document.getElementById(f).value = saved[f];
+      });
+    } catch (e) {}
+
+    // Auto-save no blur (rede de segurança)
+    fields.forEach((f) => {
+      document.getElementById(f).addEventListener("blur", saveQuiet);
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      saveQuiet();
+      showToast("Roteiro salvo ✓");
+    });
+
+    document.getElementById("clear-btn").addEventListener("click", () => {
+      if (!confirm("Apagar todo o roteiro?")) return;
+      fields.forEach((f) => (document.getElementById(f).value = ""));
+      localStorage.removeItem(KEY);
+      showToast("Roteiro limpo");
+    });
+
+    function saveQuiet() {
+      const data = {};
+      fields.forEach((f) => (data[f] = document.getElementById(f).value));
+      localStorage.setItem(KEY, JSON.stringify(data));
+    }
+  </script>
+</body>
+</html>
