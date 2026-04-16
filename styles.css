@@ -224,16 +224,21 @@ body {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--surface);
-  color: var(--text);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
   text-decoration: none;
-  font-size: 1.4rem;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
   flex-shrink: 0;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.back-btn:active { transform: scale(0.92); }
+.back-btn:active {
+  transform: scale(0.92);
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
+}
 
 .page-title {
   font-size: 1.4rem;
@@ -314,6 +319,34 @@ body {
   color: var(--muted);
   font-size: 1.2rem;
   flex-shrink: 0;
+}
+
+/* Link para site externo (dentro de .list) */
+.site-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1rem;
+  background: var(--surface-2);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.site-link:active {
+  transform: scale(0.97);
+  background: var(--surface);
+}
+
+@media (prefers-color-scheme: dark) {
+  .site-link {
+    color: var(--yellow);
+  }
 }
 
 /* Botão de chamada de emergência (CTA grande) */
