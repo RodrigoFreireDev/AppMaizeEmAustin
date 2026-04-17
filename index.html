@@ -14,7 +14,7 @@
   
   <main class="container">
     <header class="hero">
-      <div class="hero-wave" aria-hidden="true">🌅</div>
+      <button type="button" class="hero-wave" id="heroEgg" aria-label="Surpresa">🌅</button>
       <h1 class="hero-title">Bem-vinda, Maize! 👋</h1>
       <p class="hero-subtitle">Sua viagem para Austin começa aqui 🇺🇸</p>
     </header>
@@ -53,6 +53,18 @@
       Feito com 💛 para sua viagem
     </footer>
   </main>
+
+  <div class="egg-overlay" id="eggOverlay" aria-hidden="true">
+    <div class="egg-modal" role="dialog" aria-label="Surpresa">
+      <button type="button" class="egg-close" id="eggClose" aria-label="Fechar">✕</button>
+      <div class="egg-gallery">
+        <img src="img/1.jpeg" alt="" loading="lazy" />
+        <img src="img/2.jpeg" alt="" loading="lazy" />
+        <img src="img/3.jpeg" alt="" loading="lazy" />
+      </div>
+      <p class="egg-caption">Amamos você &lt;3</p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

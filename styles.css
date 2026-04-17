@@ -90,6 +90,26 @@ body {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  line-height: 1;
+  font-family: inherit;
+  color: inherit;
+  transition: transform 0.15s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-wave:active {
+  transform: scale(0.88) rotate(-8deg);
+}
+
+.hero-wave:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 4px;
+  border-radius: 12px;
 }
 
 .hero-title {
@@ -532,4 +552,89 @@ body {
 }
 .toast.show {
   transform: translateX(-50%) translateY(0);
+}
+
+/* ========== EASTER EGG ========== */
+.egg-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 20, 25, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  z-index: 200;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.egg-overlay.show {
+  display: flex;
+  opacity: 1;
+}
+
+.egg-modal {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.25rem 1rem 1.5rem;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  margin: auto;
+  transform: scale(0.92);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.egg-overlay.show .egg-modal {
+  transform: scale(1);
+}
+
+.egg-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  z-index: 1;
+}
+
+.egg-close:active { transform: scale(0.9); }
+
+.egg-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.egg-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  display: block;
+  box-shadow: var(--shadow);
+}
+
+.egg-caption {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 1rem;
+  letter-spacing: -0.01em;
 }

@@ -21,3 +21,32 @@ document.addEventListener("click", (e) => {
     navigator.vibrate(8);
   }
 });
+
+// Easter egg: clique no 🌅 abre galeria surpresa
+(function () {
+  const egg = document.getElementById("heroEgg");
+  const overlay = document.getElementById("eggOverlay");
+  const closeBtn = document.getElementById("eggClose");
+  if (!egg || !overlay) return;
+
+  const open = () => {
+    overlay.classList.add("show");
+    overlay.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    if (navigator.vibrate) navigator.vibrate([10, 40, 10]);
+  };
+  const close = () => {
+    overlay.classList.remove("show");
+    overlay.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  egg.addEventListener("click", open);
+  closeBtn?.addEventListener("click", close);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("show")) close();
+  });
+})();
